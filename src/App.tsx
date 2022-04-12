@@ -18,21 +18,53 @@ interface State {
 }
 
 class App extends React.Component<Props, State> {
+    //  🔥 生命周期第一阶段：初始化状态
   constructor(props: Props) {
+      console.log('constructor', new Date().getTime())
     super(props)
     this.state = {
         robots: robots,
         count: 0
     }
   }
+    // 生命周期第一阶段：在组件创建好dom元素以后、挂载进页面的时候调用
   async componentDidMount() {
+      console.log('componentDidMount')
       const res = await fetch('https://jsonplaceholder.typicode.com/users')
       const json = await res.json()
       this.setState({
         robots: json
       })
   }
-  render() {
+
+    // 🔥 生命周期第二阶段：更新状态
+    // 更新前: 组件接收到一个新的 props (更新)时被调用
+    // componentWillReceiveProps(nextProps: Readonly<Props>, nextContext: any) {} //  弃用
+    //  建议使用下面👇的
+    static getDerivedStateFromProps(nextProps: Readonly<Props>, prevState: State) {
+        console.log('getDerivedStateFromProps')
+        return null
+    }
+
+    // 更新中: 人为控制是否更新
+    shouldComponentUpdate(nextProps: Readonly<Props>, nextState: Readonly<State>, nextContext: any) {
+        console.log('shouldComponentUpdate')
+        return true
+    }
+
+    // 更新后
+    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>, snapshot?: any) {
+        console.log('componentDidUpdate')
+    }
+
+    // 🔥 生命周期第三阶段：卸载组件
+    // 组件销毁后调用，用于释放资源
+    componentWillUnmount() {
+        console.log('componentWillUnmount')
+    }
+
+    render() {
+        console.log('render')
       return (
           <div className={styles.app}>
               <div className={styles.appHeader}>

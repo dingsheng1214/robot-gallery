@@ -1,4 +1,4 @@
-import React, { StrictMode } from "react";
+import React from "react";
 import { createRoot } from "react-dom/client";
 
 import './index.css';
@@ -10,9 +10,7 @@ const container = document.getElementById('root');
 // container may be null 👇, use type assertion to fix it
 const root = createRoot(container as Element)
 root.render(
-    <StrictMode>
         <App />
-    </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
