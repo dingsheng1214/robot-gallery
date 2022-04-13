@@ -35,7 +35,7 @@ const AppHooks: React.FC<Props> = () => {
             })
         }
         fetchData()
-    })
+    }, [])
 
     return (
         <div className={styles.app}>
@@ -51,7 +51,7 @@ const AppHooks: React.FC<Props> = () => {
                 {
                     state.robots.map(({id, name, email}, index) => {
                         return (
-                            index < 5 ? <Robot key={id} id={id} name={name} email={email}/> :
+                            index % 2 === 0 ? <Robot key={id} id={id} name={name} email={email}/> :
                                 <RobotDiscount key={id} id={id} name={name} email={email} />
                         )
                     })
