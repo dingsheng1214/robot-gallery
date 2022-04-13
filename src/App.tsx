@@ -4,6 +4,7 @@ import styles from './App.module.css';
 import robots from './mock/robot.json'
 import Robot from './components/Robot'
 import ShoppingCart from './components/ShoppingCart'
+import Hooks from './components/Hooks';
 
 interface IRobot {
   id: number;
@@ -71,53 +72,58 @@ class App extends React.Component<Props, State> {
                   <img src={logo} className={styles.appLogo} alt=""/>
               </div>
               <h1>罗伯特机器人狂拽炫酷吊炸天online在线购物平台名字要长</h1>
-              <button onClick={() => {
-                  this.setState({count: this.state.count+1})
-                  console.log(this.state.count) // 0
 
-                  this.setState({count: this.state.count+1})
-                  console.log(this.state.count) // 0
-              }}>
-                  计数器 {this.state.count}
-              </button>
-              <button onClick={() => {
-                  this.setState({count: this.state.count+1}, () => {
-                      console.log(this.state.count) // 1
-                  })
-
-                  this.setState({count: this.state.count+1}, () => {
-                      console.log(this.state.count) // 1
-                  })
-              }}>
-                  计数器 {this.state.count}
-              </button>
-              <button onClick={() => {
-                  this.setState((prevState: State) => {
+              <div>
+                  <button onClick={() => {
+                      this.setState({count: this.state.count+1})
                       console.log(this.state.count) // 0
-                      console.log(prevState.count) // 0
-                      return {
-                          count: prevState.count+1
-                      }
-                  })
-                  console.log(this.state.count) // 0
 
-                  this.setState((prevState: State) => {
+                      this.setState({count: this.state.count+1})
                       console.log(this.state.count) // 0
-                      console.log(prevState.count) // 0
-                      return {
-                          count: prevState.count+1
-                      }
-                  })
-                  console.log(this.state.count) // 0
-              }}>
-                  计数器 {this.state.count}
-              </button>
+                  }}>
+                      计数器 {this.state.count}
+                  </button>
+                  <button onClick={() => {
+                      this.setState({count: this.state.count+1}, () => {
+                          console.log(this.state.count) // 1
+                      })
+
+                      this.setState({count: this.state.count+1}, () => {
+                          console.log(this.state.count) // 1
+                      })
+                  }}>
+                      计数器 {this.state.count}
+                  </button>
+                  <button onClick={() => {
+                      this.setState((prevState: State) => {
+                          console.log(this.state.count) // 0
+                          console.log(prevState.count) // 0
+                          return {
+                              count: prevState.count+1
+                          }
+                      })
+                      console.log(this.state.count) // 0
+
+                      this.setState((prevState: State) => {
+                          console.log(this.state.count) // 0
+                          console.log(prevState.count) // 0
+                          return {
+                              count: prevState.count+1
+                          }
+                      })
+                      console.log(this.state.count) // 0
+                  }}>
+                      计数器 {this.state.count}
+                  </button>
+              </div>
+
               <ShoppingCart />
 
               <div className={styles.robotList}>
                   {
                       this.state.robots.map(({id, name, email}) => <Robot key={id} id={id} name={name} email={email} />)
                   }
+                  <Hooks />
               </div>
           </div>
       );

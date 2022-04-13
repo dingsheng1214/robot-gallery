@@ -10,7 +10,9 @@ const container = document.getElementById('root');
 // container may be null 👇, use type assertion to fix it
 const root = createRoot(container as Element)
 root.render(
+    <div>
         <App />
+    </div>
 );
 
 // If you want to start measuring performance in your app, pass a function
