@@ -5,6 +5,7 @@ import robots from './mock/robot.json'
 import Robot from './components/Robot'
 import ShoppingCart from './components/ShoppingCart'
 import Hooks from './components/Hooks';
+import RobotDiscount from './components/RobotDiscount';
 
 interface IRobot {
     id: number;
@@ -46,8 +47,14 @@ const AppHooks: React.FC<Props> = () => {
             <ShoppingCart />
 
             <div className={styles.robotList}>
+
                 {
-                    state.robots.map(({id, name, email}) => <Robot key={id} id={id} name={name} email={email} />)
+                    state.robots.map(({id, name, email}, index) => {
+                        return (
+                            index < 5 ? <Robot key={id} id={id} name={name} email={email}/> :
+                                <RobotDiscount key={id} id={id} name={name} email={email} />
+                        )
+                    })
                 }
                 <Hooks />
             </div>
