@@ -2,16 +2,18 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import AppHooks from './AppHooks';
+import { AppStateProvider } from './context/AppState';
 
 const container = document.getElementById('root');
-
 // container may be null 👇, use type assertion to fix it
 const root = createRoot(container as Element)
 root.render(
     <div>
-        <App />
+        <AppStateProvider>
+            <AppHooks />
+        </AppStateProvider>
     </div>
 );
 

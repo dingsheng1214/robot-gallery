@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styles from './Robot.module.css'
+import { appContext } from '../context/AppState';
 
 interface Props {}
 
@@ -26,17 +27,33 @@ const Hooks: React.FC<Props> = (props: Props) => {
       }
       fetchData()
   }, []);
+
+  const { userInfo }= useContext(appContext);
   return (
-    <div className={styles.cardContainer}>
-        <h2>Hooks</h2>
-        <div>
-            <h3>useState</h3>
-            <button onClick={() => setCount(count + 1)}>
-                Click me
-            </button>
-            <p>You clicked {count} times</p>
-        </div>
-    </div>
+      <appContext.Consumer>
+          {
+              (context) => {
+                  return (
+                      <div className={styles.cardContainer}>
+                          <h2>Hooks</h2>
+                          <div>
+                              <h3>useState</h3>
+                              <button onClick={() => setCount(count + 1)}>
+                                  Click me
+                              </button>
+                              <p>You clicked {count} times</p>
+                          </div>
+                          <div>
+                              <h3>useContext</h3>
+                              <p>{userInfo.name}</p>
+                              <p>{userInfo.pwd}</p>
+                          </div>
+                      </div>
+                  )
+              }
+          }
+
+      </appContext.Consumer>
   );
 };
 export default Hooks
